@@ -31,5 +31,4 @@ class CounterActivity : AppCompatActivity() {
         super.onDestroy()
         RxBus.clear(this)
     }
-
 }

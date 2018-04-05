@@ -3,7 +3,7 @@ package com.globant.counter.utils.bus
 import com.globant.counter.utils.bus.observer.BusObserver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
-import java.util.*
+import java.util.HashMap
 
 object RxBus {
     private val disposableMap = HashMap<Any, CompositeDisposable>()
@@ -13,19 +13,15 @@ object RxBus {
         publishSubject.onNext(`object`)
     }
 
-    fun subscribe(key: Any, busObserver: BusObserver<*>) {
-        var compositeDisposable: CompositeDisposable? = disposableMap[key]
-        if (compositeDisposable == null) {
-            compositeDisposable = CompositeDisposable()
-        }
-        compositeDisposable.add(publishSubject.subscribe(busObserver))
-        disposableMap.put(key, compositeDisposable)
+    fun <T> subscribe(key: Any, clazz: Class<T>, onValue: (T) -> Unit) {
+        val compositeDisposable = disposableMap.getOrPut(key, { CompositeDisposable() })
+
+        compositeDisposable.add(publishSubject.subscribe(BusObserver(clazz, onValue)))
     }
 
     fun clear(key: Any) {
-        val compositeDisposable = disposableMap[key]
+        val compositeDisposable = disposableMap.remove(key)
         compositeDisposable?.clear()
-        disposableMap.remove(key)
     }
 
     fun clearAll() {
