@@ -1,61 +1,65 @@
 package com.globant.counter
 
-import com.globant.counter.counter.CountModel
 import com.globant.counter.counter.CountPresenter
-import com.globant.counter.counter.ActivityCountView
-import com.globant.counter.counter.CounterActivity
+import com.globant.counter.counter.CountView
+import com.globant.counter.counter.Events
+import com.globant.counter.domain.interactors.FetchCounterValue
+import com.globant.counter.domain.interactors.IncrementCounter
+import com.globant.counter.domain.interactors.ResetCounter
 import com.globant.counter.utils.bus.RxBus
-import com.globant.counter.counter.OnCountButtonPressedBusObserver
-import com.globant.counter.counter.OnResetButtonPressedBusObserver
-import org.junit.Assert.assertEquals
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.mockito.Mockito.`when` as whenever
 
-class PresenterTest {
+class MainPresenterTest {
 
-    private var presenter: CountPresenter? = null
-    private var model: CountModel? = null
+    private lateinit var presenter: CountPresenter
+
     @Mock
-    lateinit var view: ActivityCountView
-    @Mock
-    lateinit var activity: CounterActivity
+    lateinit var view: CountView
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        model = CountModel()
-        // When
-        whenever(view.activity).thenReturn(activity)
 
-        presenter = CountPresenter(model!!, view)
+        presenter = CountPresenter(
+                MainPresenterTest::class.java,
+                FetchCounterValue(), // These would be also mocked, but it's out of scope for MVP example
+                IncrementCounter(),
+                ResetCounter(),
+                view
+        )
+
+        ResetCounter().execute()
+    }
+
+    @After
+    fun tearDown() {
+        presenter.dispose()
     }
 
     @Test
     fun isShouldIncCountByOne() {
-        model!!.reset();
-        RxBus.post(OnCountButtonPressedBusObserver.OnCountButtonPressed())
+        RxBus.post(Events.OnCountButtonPressed)
 
         val count = "1"
-        assertEquals(model!!.count, 1)
         verify(view).setCount(count)
     }
 
     @Test
-      fun isShouldResetCount() {
-        RxBus.post(OnCountButtonPressedBusObserver.OnCountButtonPressed())
-        RxBus.post(OnCountButtonPressedBusObserver.OnCountButtonPressed())
-        RxBus.post(OnCountButtonPressedBusObserver.OnCountButtonPressed())
-        var count = 3
-        assertEquals(model!!.count, count)
+    fun isShouldResetCount() {
+        RxBus.post(Events.OnCountButtonPressed)
+        RxBus.post(Events.OnCountButtonPressed)
+        RxBus.post(Events.OnCountButtonPressed)
 
-        RxBus.post(OnResetButtonPressedBusObserver.OnResetButtonPressed())
-        count = 0
-        assertEquals(model!!.count, count)
-        val invocations = 4
-        verify(view, times(invocations)).setCount(anyString());
+        verify(view).setCount("3")
+
+        RxBus.post(Events.OnResetButtonPressed)
+
+        verify(view).setCount("0")
     }
 }
