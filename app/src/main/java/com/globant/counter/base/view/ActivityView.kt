@@ -3,6 +3,7 @@ package com.globant.counter.base.view
 import android.app.Activity
 import android.app.FragmentManager
 import android.content.Context
+import com.globant.counter.utils.bus.RxBus
 
 import java.lang.ref.WeakReference
 
@@ -21,4 +22,7 @@ open class ActivityView(activity: Activity) {
             return activity?.fragmentManager
         }
 
+    fun postEvent(event: Any) {
+        RxBus.post(event)
+    }
 }

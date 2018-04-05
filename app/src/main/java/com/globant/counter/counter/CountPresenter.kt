@@ -1,24 +1,24 @@
 package com.globant.counter.counter
 
+import com.globant.counter.base.presenter.BasePresenter
 import com.globant.counter.domain.interactors.FetchCounterValue
 import com.globant.counter.domain.interactors.IncrementCounter
 import com.globant.counter.domain.interactors.ResetCounter
-import com.globant.counter.utils.bus.RxBus
 
 class CountPresenter(
-        rxBusKey: Class<*>,
+        rxBusKey: Any,
         fetchCounterValue: FetchCounterValue,
         incrementCounter: IncrementCounter,
         resetCounter: ResetCounter,
         view: CountView
-) {
+) : BasePresenter(rxBusKey) {
     init {
-        RxBus.subscribe(rxBusKey, Events.OnCountButtonPressed::class.java) {
+        subscribe(Events.OnCountButtonPressed::class.java) {
             incrementCounter.execute()
             view.setCount(fetchCounterValue.execute().toString())
         }
 
-        RxBus.subscribe(rxBusKey, Events.OnResetButtonPressed::class.java) {
+        subscribe(Events.OnResetButtonPressed::class.java) {
             resetCounter.execute()
             view.setCount(fetchCounterValue.execute().toString())
         }

@@ -6,7 +6,6 @@ import com.globant.counter.R
 import com.globant.counter.domain.interactors.FetchCounterValue
 import com.globant.counter.domain.interactors.IncrementCounter
 import com.globant.counter.domain.interactors.ResetCounter
-import com.globant.counter.utils.bus.RxBus
 
 
 class CounterActivity : AppCompatActivity() {
@@ -29,6 +28,7 @@ class CounterActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        RxBus.clear(this)
+
+        presenter?.dispose()
     }
 }
