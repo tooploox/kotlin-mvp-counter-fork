@@ -11,11 +11,11 @@ class CountView(activity: Activity) : ActivityView(activity) {
 
     init {
         activity.count_button.setOnClickListener {
-            RxBus.post(OnCountButtonPressedBusObserver.OnCountButtonPressed())
+            RxBus.post(OnCountButtonPressed)
         }
 
         activity.reset_button.setOnClickListener {
-            RxBus.post(OnResetButtonPressedBusObserver.OnResetButtonPressed())
+            RxBus.post(OnResetButtonPressed)
         }
     }
 
