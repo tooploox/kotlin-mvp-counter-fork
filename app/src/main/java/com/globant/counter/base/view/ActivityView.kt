@@ -1,4 +1,4 @@
-package com.globant.counter.mvp.view
+package com.globant.counter.base.view
 
 import android.app.Activity
 import android.app.FragmentManager

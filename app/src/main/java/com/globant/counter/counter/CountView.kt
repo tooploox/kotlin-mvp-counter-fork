@@ -1,10 +1,9 @@
-package com.globant.counter.mvp.view
+package com.globant.counter.counter
 
 
 import android.app.Activity
+import com.globant.counter.base.view.ActivityView
 import com.globant.counter.utils.bus.RxBus
-import com.globant.counter.utils.bus.observer.OnCountButtonPressedBusObserver
-import com.globant.counter.utils.bus.observer.OnResetButtonPressedBusObserver
 import kotlinx.android.synthetic.main.activity_main.*
 
 

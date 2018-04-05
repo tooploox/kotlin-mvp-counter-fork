@@ -1,7 +1,9 @@
-package com.globant.counter.utils.bus.observer
+package com.globant.counter.counter
+
+import com.globant.counter.utils.bus.observer.BusObserver
 
 abstract class OnResetButtonPressedBusObserver : BusObserver<OnResetButtonPressedBusObserver.OnResetButtonPressed>
-    (OnResetButtonPressedBusObserver.OnResetButtonPressed::class.java) {
+    (OnResetButtonPressed::class.java) {
 
     class OnResetButtonPressed
 }

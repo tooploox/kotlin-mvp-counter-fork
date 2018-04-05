@@ -1,10 +1,6 @@
-package com.globant.counter.mvp.presenter
+package com.globant.counter.counter
 
-import com.globant.counter.mvp.model.CountModel
-import com.globant.counter.mvp.view.CountView
 import com.globant.counter.utils.bus.RxBus
-import com.globant.counter.utils.bus.observer.OnCountButtonPressedBusObserver
-import com.globant.counter.utils.bus.observer.OnResetButtonPressedBusObserver
 
 class CountPresenter(model: CountModel, view: CountView) {
 
