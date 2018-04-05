@@ -13,7 +13,7 @@ class CounterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter = CountPresenter(CountModel(), CountView(this))
+        presenter = CountPresenter(CounterActivity::class.java, CountModel(), ActivityCountView(this))
     }
 
     override fun onDestroy() {

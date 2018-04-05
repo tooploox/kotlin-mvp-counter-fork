@@ -2,7 +2,7 @@ package com.globant.counter
 
 import com.globant.counter.counter.CountModel
 import com.globant.counter.counter.CountPresenter
-import com.globant.counter.counter.CountView
+import com.globant.counter.counter.ActivityCountView
 import com.globant.counter.counter.CounterActivity
 import com.globant.counter.utils.bus.RxBus
 import com.globant.counter.counter.OnCountButtonPressedBusObserver
@@ -20,7 +20,7 @@ class PresenterTest {
     private var presenter: CountPresenter? = null
     private var model: CountModel? = null
     @Mock
-    lateinit var view: CountView
+    lateinit var view: ActivityCountView
     @Mock
     lateinit var activity: CounterActivity
 
