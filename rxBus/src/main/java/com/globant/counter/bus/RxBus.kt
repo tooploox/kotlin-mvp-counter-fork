@@ -1,6 +1,6 @@
-package com.globant.counter.utils.bus
+package com.globant.counter.bus
 
-import com.globant.counter.utils.bus.observer.BusObserver
+import com.globant.counter.bus.observer.BusObserver
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import java.util.HashMap

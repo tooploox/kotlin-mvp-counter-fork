@@ -1,0 +1,8 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(':rxBus')
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+}

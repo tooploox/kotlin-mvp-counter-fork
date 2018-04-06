@@ -1,1 +1,9 @@
-include ':app'
+// Application-specific modules
+include ':app', // Main application module
+        ':domain', // The domain logic implementation
+        ':presentation' // Presenters and contracts for the views
+
+// Base modules, shared between applications
+include ':mvpBase', // Base classes for Android-specific MVP
+        ':rxBus', // RxBus implementation
+        ':presentationBase' // Base classes for the presenters

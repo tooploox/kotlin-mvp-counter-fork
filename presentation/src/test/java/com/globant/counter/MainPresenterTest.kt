@@ -1,12 +1,12 @@
 package com.globant.counter
 
+import com.globant.counter.bus.RxBus
 import com.globant.counter.counter.CountPresenter
 import com.globant.counter.counter.CountView
 import com.globant.counter.counter.Events
 import com.globant.counter.domain.interactors.FetchCounterValue
 import com.globant.counter.domain.interactors.IncrementCounter
 import com.globant.counter.domain.interactors.ResetCounter
-import com.globant.counter.utils.bus.RxBus
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -20,7 +20,7 @@ class MainPresenterTest {
     private lateinit var presenter: CountPresenter
 
     @Mock
-    lateinit var view: CountView
+    private lateinit var view: CountView
 
     @Before
     fun setup() {
