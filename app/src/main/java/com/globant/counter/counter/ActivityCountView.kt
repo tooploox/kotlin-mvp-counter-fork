@@ -17,6 +17,6 @@ class ActivityCountView(activity: Activity) : ActivityView(activity), CountView 
     }
 
     override fun setCount(count: String) {
-        activity!!.count_label.text = count
+        activity.count_label.text = count
     }
 }
