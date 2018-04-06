@@ -1,44 +1,24 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+rootProject.ext.configureAndroidApplication(project)
 
 android {
-    compileSdkVersion 26
     defaultConfig {
         applicationId "com.globant.counter"
-        minSdkVersion 21
-        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 }
 
 dependencies {
 
-    implementation project(':domain')
-    implementation project(':mvpBase')
-    implementation project(':presentationBase')
-    implementation project(':presentation')
+    implementation projects.domain
+    implementation projects.mvpBase
+    implementation projects.presentationBase
+    implementation projects.presentation
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.8.9'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito:2.2.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation libs.kotlin
+    implementation libs.appCompat
+    implementation libs.constraintLayout
+    implementation libs.rxJava
+    implementation libs.rxAndroid
 }

@@ -1,0 +1,42 @@
+ext.configureAndroidApplication = { project ->
+    project.apply plugin: "com.android.application"
+    project.apply plugin: 'kotlin-android-extensions'
+
+    configureAndroidModule(project)
+}
+
+ext.configureAndroidLibrary = { project ->
+    project.apply plugin: "com.android.library"
+
+    configureAndroidModule(project)
+}
+
+ext.configureKotlinModule = { project ->
+    project.apply plugin: 'kotlin'
+    configureDependencies(project)
+}
+
+def configureAndroidModule(project) {
+    project.apply plugin: 'kotlin-android'
+    project.apply plugin: 'kotlin-kapt'
+
+    project.android {
+        compileSdkVersion rootProject.ext.compileSdkVersion
+
+        defaultConfig {
+            minSdkVersion rootProject.ext.minSdkVersion
+            targetSdkVersion rootProject.ext.targetSdkVersion
+        }
+
+        sourceSets {
+            main.java.srcDirs += 'src/main/kotlin'
+            main.java.srcDirs += 'src/main/java'
+            test.java.srcDirs += 'src/test/kotlin'
+        }
+    }
+    configureDependencies(project)
+}
+
+def configureDependencies(project) {
+    project.apply from: rootProject.file('scripts/dependencies.gradle')
+}
