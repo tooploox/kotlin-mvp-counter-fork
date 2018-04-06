@@ -13,12 +13,12 @@ class CountPresenter(
         view: CountView
 ) : BasePresenter(rxBusKey) {
     init {
-        subscribe(Events.OnCountButtonPressed::class.java) {
+        subscribe(CountView.Events.OnCountButtonPressed::class.java) {
             incrementCounter.execute()
             view.setCount(fetchCounterValue.execute().toString())
         }
 
-        subscribe(Events.OnResetButtonPressed::class.java) {
+        subscribe(CountView.Events.OnResetButtonPressed::class.java) {
             resetCounter.execute()
             view.setCount(fetchCounterValue.execute().toString())
         }

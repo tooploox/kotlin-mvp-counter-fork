@@ -8,11 +8,11 @@ class ActivityCountView(activity: Activity) : ActivityView(activity), CountView 
 
     init {
         activity.count_button.setOnClickListener {
-            postEvent(Events.OnCountButtonPressed)
+            postEvent(CountView.Events.OnCountButtonPressed)
         }
 
         activity.reset_button.setOnClickListener {
-            postEvent(Events.OnResetButtonPressed)
+            postEvent(CountView.Events.OnResetButtonPressed)
         }
     }
 
